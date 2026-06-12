@@ -90,7 +90,7 @@ Projenin internet ortamındaki dağıtımı GitHub Pages altyapısı
 sıfır kesintiyle canlıya alır.
 
 > 🚀 **Canlı Önizleme Adresi (GitHub Pages)**
-> 👉 [LokmaDefteri Canlı Site](https://caner-mercan.github.io/lokmadefteri)
+> 👉 [LokmaDefteri Canlı Site](https://soykangulelcin.github.io/lokmadefteri/)
 
 ---
 
