@@ -72,7 +72,7 @@ Projenin yerel bilgisayardaki geliştirme aşamalarından itibaren terminal
 > 🔗 **4. Uzak Depo Bağlantısı ve Push**
 > ```bash
 > git branch -M main
-> git remote add origin https://github.com/caner-mercan/lokmadefteri.git
+> git remote add origin https://github.com/soykangulelcin/lokmadefteri.git
 > git push -u origin main
 > # Ana dal main yapıldı, GitHub
 > # uzak sunucu adresi bağlandı ve
