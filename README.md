@@ -10,7 +10,7 @@ yönelik teknik çözümleri en ince ayrıntısına kadar açıklamaktadır.
 
 ## 📂 BÖLÜM 1: Ödev Sahibi ve Geliştirici Bilgileri
 
-* **Geliştirici Adı Soyadı:** Caner Mercan
+* **Geliştirici Adı Soyadı:** Soykan GÜLELÇİN
 * **Ödev Statüsü:** Web Tasarım Ödevi (Dönem İçi Standart Ödev Çalışması)
 * **Ödev Teması:** Ev Yapımı Tarifler, Dünya Mutfakları ve Bartın Lezzetlerini
   Kategorili Filtreleme, Favori Sistemi, Karanlık Tema ve Günlük API Entegrasyonu
