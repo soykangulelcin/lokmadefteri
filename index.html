@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="tr" id="html-root">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LokmaDefteri | En Özel Tarifler</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <h2>🍽 LokmaDefteri</h2>
+  <div class="navbar-buttons">
+    <button class="fav-nav-btn" onclick="toggleFavoritesPanel()">❤️ Favorilerim <span id="fav-count" class="fav-count">0</span></button>
+    <button class="theme-toggle-btn" id="theme-btn" onclick="toggleTheme()">🌙 Karanlık</button>
+    <button onclick="scrollToRecipes()">Tariflere Git</button>
+  </div>
+</nav>
+
+<!-- FAVORİLER PANELİ -->
+<div id="favorites-panel" class="favorites-panel hidden">
+  <div class="favorites-header">
+    <h3>❤️ Favorilerim</h3>
+    <button onclick="toggleFavoritesPanel()" class="close-fav-btn">✕</button>
+  </div>
+  <div id="favorites-list" class="favorites-list">
+    <p class="fav-empty">Henüz favori tarif eklemediniz.</p>
+  </div>
+</div>
+
+<section class="hero">
+  <h1>Her lokmada <span>mutluluk</span></h1>
+  <p>En özel tarifler, iştah açıcı sunumlar burada.</p>
+  <button onclick="scrollToRecipes()">Keşfet</button>
+</section>
+
+<section class="categories">
+  <div class="cat active" onclick="filterCategory('all', this)">Hepsi</div>
+  <div class="cat" onclick="filterCategory('tatli', this)">Tatlılar</div>
+  <div class="cat" onclick="filterCategory('ekmek', this)">Ekmekler</div>
+  <div class="cat" onclick="filterCategory('cookie', this)">Kurabiyeler</div>
+  <div class="cat" onclick="filterCategory('corba', this)">Çorbalar</div>
+  <div class="cat" onclick="filterCategory('salata', this)">Salatalar</div>
+  <div class="cat" onclick="filterCategory('bartin', this)">Bartın Lezzetleri</div>
+  <div class="cat" onclick="filterCategory('dunya', this)">Dünya Mutfakları</div>
+</section>
+
+<!-- Dünya Mutfakları İçindeyken Ülkelere Geri Dönebilmek İçin Navigasyon Alanı -->
+<div id="world-nav" class="world-navigation hidden">
+  <button onclick="showCountrySelection()" class="back-countries-btn">🔙 Dünya Mutfaklarına Dön</button>
+  <h2 id="current-country-title"></h2>
+</div>
+
+<section id="recipes" class="grid">
+
+  <!-- TATLILAR -->
+  <div class="card" data-category="tatli" onclick="openRecipe('Cheesecake')">
+    <img src="images/cheesecake.jpg" alt="San Sebastian Cheesecake">
+    <h3>Cheesecake</h3>
+  </div>
+
+  <div class="card" data-category="tatli" onclick="openRecipe('Brownie')">
+    <img src="images/brownie.jpg" alt="Bol Çikolatalı Brownie">
+    <h3>Brownie</h3>
+  </div>
+
+  <div class="card" data-category="tatli" onclick="openRecipe('Tiramisu')">
+    <img src="images/tiramisu.jpg" alt="İtalyan Usulü Tiramisu">
+    <h3>Tiramisu</h3>
+  </div>
+
+  <div class="card" data-category="tatli" onclick="openRecipe('Sütlaç')">
+    <img src="images/sutlac.jpg" alt="Fırın Sütlaç">
+    <h3>Sütlaç</h3>
+  </div>
+
+  <div class="card" data-category="tatli" onclick="openRecipe('Magnolia')">
+    <img src="images/magnolia.jpg" alt="Çilekli Magnolia">
+    <h3>Magnolia</h3>
+  </div>
+
+  <div class="card" data-category="tatli" onclick="openRecipe('Profiterol')">
+    <img src="images/profiterol.jpg" alt="Ev Yapımı Profiterol">
+    <h3>Profiterol</h3>
+  </div>
+
+  <!-- EKMEKLER -->
+  <div class="card" data-category="ekmek" onclick="openRecipe('Ekşi Mayalı Ekmek')">
+    <img src="images/ekşi mayalı ekmek.jpg" alt="Geleneksel Ekşi Mayalı Ekmek">
+    <h3>Ekşi Mayalı Ekmek</h3>
+  </div>
+
+  <div class="card" data-category="ekmek" onclick="openRecipe('Foccacia')">
+    <img src="images/foccacia.jpg" alt="Zeytinli Biberiyeli Foccacia">
+    <h3>Foccacia</h3>
+  </div>
+
+  <div class="card" data-category="ekmek" onclick="openRecipe('Ciabatta')">
+    <img src="images/ciabatta.jpg" alt="Gözenekli İtalyan Ciabatta">
+    <h3>Ciabatta</h3>
+  </div>
+
+  <div class="card" data-category="ekmek" onclick="openRecipe('Hamburger Ekmeği')">
+    <img src="images/hamburger ekmeği.jpg" alt="Yumuşacık Hamburger Ekmeği">
+    <h3>Hamburger Ekmeği</h3>
+  </div>
+
+  <div class="card" data-category="ekmek" onclick="openRecipe('Sandviç Ekmeği')">
+    <img src="images/sandwich ekmeği.jpg" alt="Ev Yapımı Sandviç Ekmeği">
+    <h3>Sandviç Ekmeği</h3>
+  </div>
+
+  <div class="card" data-category="ekmek" onclick="openRecipe('Baget Ekmek')">
+    <img src="images/fransız baget.jpg" alt="Çıtır Fransız Bageti">
+    <h3>Baget Ekmek</h3>
+  </div>
+
+  <div class="card" data-category="ekmek" onclick="openRecipe('Pita Ekmeği')">
+    <img src="images/pita ekmeği.jpg" alt="Arası Açılan Pita Ekmeği">
+    <h3>Pita Ekmeği</h3>
+  </div>
+
+  <div class="card" data-category="ekmek" onclick="openRecipe('Bazlama')">
+    <img src="images/bazlama.jpg" alt="Yumuşacık Köy Bazlaması">
+    <h3>Bazlama</h3>
+  </div>
+
+  <div class="card" data-category="ekmek" onclick="openRecipe('Çiçek Ekmek')">
+    <img src="images/çiçek ekmek.jpg" alt="Pamuk Çiçek Ekmek">
+    <h3>Çiçek Ekmek</h3>
+  </div>
+
+  <div class="card" data-category="ekmek" onclick="openRecipe('Mısır Ekmeği')">
+    <img src="images/mısır ekmeği.jpg" alt="Karadeniz Usulü Mısır Ekmeği">
+    <h3>Mısır Ekmeği</h3>
+  </div>
+
+  <div class="card" data-category="ekmek" onclick="openRecipe('Fougasse')">
+    <img src="images/fougasse.jpg" alt="Yaprak Şekilli Fransız Fougasse">
+    <h3>Fougasse</h3>
+  </div>
+
+  <div class="card" data-category="ekmek" onclick="openRecipe('Shokupan')">
+    <img src="images/shokupan.jpg" alt="Japon Sütlü Ekmeği Shokupan">
+    <h3>Shokupan</h3>
+  </div>
+
+  <!-- COOKIES -->
+  <div class="card" data-category="cookie" onclick="openRecipe('Chocolate Chip Cookie')">
+    <img src="images/chocolate chip cookie.jpg" alt="Chocolate Chip Cookie">
+    <h3>Chocolate Chip Cookie</h3>
+  </div>
+
+  <div class="card" data-category="cookie" onclick="openRecipe('Levain Cookie')">
+    <img src="images/levain cookie.jpg" alt="Levain Cookie">
+    <h3>Levain Cookie</h3>
+  </div>
+
+  <div class="card" data-category="cookie" onclick="openRecipe('Red Velvet Cookie')">
+    <img src="images/red velvet cookie.jpg" alt="Red Velvet Cookie">
+    <h3>Red Velvet Cookie</h3>
+  </div>
+
+  <div class="card" data-category="cookie" onclick="openRecipe('Lemon Cookie')">
+    <img src="images/lemon cookie.jpg" alt="Lemon Cookie">
+    <h3>Lemon Cookie</h3>
+  </div>
+
+  <div class="card" data-category="cookie" onclick="openRecipe('Van Stapele Cookie')">
+    <img src="images/van stapele cookie.jpg" alt="Van Stapele Cookie">
+    <h3>Van Stapele Cookie</h3>
+  </div>
+
+  <div class="card" data-category="cookie" onclick="openRecipe('Lemon Blueberry Cheesecake Cookie')">
+    <img src="images/Lemon Blueberry Cheesecake Cookie.jpg" alt="Lemon Blueberry Cheesecake Cookie">
+    <h3>Lemon Blueberry Cheesecake Cookie</h3>
+  </div>
+
+  <div class="card" data-category="cookie" onclick="openRecipe('Strawberry Cheesecake Cookies')">
+    <img src="images/strawberry cheesecake cookie.jpg" alt="Strawberry Cheesecake Cookies">
+    <h3>Strawberry Cheesecake Cookies</h3>
+  </div>
+
+  <div class="card" data-category="cookie" onclick="openRecipe('Linzer Cookie')">
+    <img src="images/linzer cookie.jpg" alt="Linzer Cookie">
+    <h3>Linzer Cookie</h3>
+  </div>
+
+  <div class="card" data-category="cookie" onclick="openRecipe('Cookies and Cream Cookies')">
+    <img src="images/Cookies and Cream Cookies.jpg" alt="Cookies and Cream Cookies">
+    <h3>Cookies and Cream Cookies</h3>
+  </div>
+
+
+  <!-- ÇORBALAR -->
+  <div class="card" data-category="corba" onclick="openRecipe('Kelle Paça Çorbası')">
+    <img src="images/kelle paça çorbası.jpg" alt="Kelle Paça Çorbası">
+    <h3>Kelle Paça Çorbası</h3>
+  </div>
+
+  <div class="card" data-category="corba" onclick="openRecipe('Mercimek Çorbası')">
+    <img src="images/mercimek çorbası.jpg" alt="Mercimek Çorbası">
+    <h3>Mercimek Çorbası</h3>
+  </div>
+
+  <div class="card" data-category="corba" onclick="openRecipe('Tarhana Çorbası')">
+    <img src="images/tarhana çorbası.jpg" alt="Tarhana Çorbası">
+    <h3>Tarhana Çorbası</h3>
+  </div>
+
+  <div class="card" data-category="corba" onclick="openRecipe('Yayla Çorbası')">
+    <img src="images/yayla çorbası.jpg" alt="Yayla Çorbası">
+    <h3>Yayla Çorbası</h3>
+  </div>
+
+  <div class="card" data-category="corba" onclick="openRecipe('Ezogelin Çorbası')">
+    <img src="images/ezogelin çorbası.jpg" alt="Ezogelin Çorbası">
+    <h3>Ezogelin Çorbası</h3>
+  </div>
+
+  <div class="card" data-category="corba" onclick="openRecipe('Domates Çorbası')">
+    <img src="images/domates çorbası.jpg" alt="Domates Çorbası">
+    <h3>Domates Çorbası</h3>
+  </div>
+
+  <div class="card" data-category="corba" onclick="openRecipe('Kremalı Mantar Çorbası')">
+    <img src="images/kremalı mantar çorbası.jpg" alt="Kremalı Mantar Çorbası">
+    <h3>Kremalı Mantar Çorbası</h3>
+  </div>
+
+  <div class="card" data-category="corba" onclick="openRecipe('Tavuk Suyu Çorbası')">
+    <img src="images/tavuk suyu çorbası.jpg" alt="Tavuk Suyu Çorbası">
+    <h3>Tavuk Suyu Çorbası</h3>
+  </div>
+
+  <div class="card" data-category="corba" onclick="openRecipe('Balık Çorbası')">
+    <img src="images/balık çorbası.jpg" alt="Balık Çorbası">
+    <h3>Balık Çorbası</h3>
+  </div>
+
+  <!-- SALATALAR -->
+  <div class="card" data-category="salata" onclick="openRecipe('Gavurdağı Salatası')">
+    <img src="images/gavurdağı salatası.jpg" alt="Gavurdağı Salatası">
+    <h3>Gavurdağı Salatası</h3>
+  </div>
+
+  <div class="card" data-category="salata" onclick="openRecipe('Sezar Salata')">
+    <img src="images/sezar salata.jpg" alt="Sezar Salata">
+    <h3>Sezar Salata</h3>
+  </div>
+
+  <div class="card" data-category="salata" onclick="openRecipe('Patates Salatası')">
+    <img src="images/patates salatası.jpg" alt="Patates Salatası">
+    <h3>Patates Salatası</h3>
+  </div>
+
+  <div class="card" data-category="salata" onclick="openRecipe('Kısır')">
+    <img src="images/kısır.jpg" alt="Kısır">
+    <h3>Kısır</h3>
+  </div>
+
+  <div class="card" data-category="salata" onclick="openRecipe('Akdeniz Salatası')">
+    <img src="images/akdeniz salatası.jpg" alt="Akdeniz Salatası">
+    <h3>Akdeniz Salatası</h3>
+  </div>
+
+  <div class="card" data-category="salata" onclick="openRecipe('Rus Salatası')">
+    <img src="images/rus salatası.jpg" alt="Rus Salatası">
+    <h3>Rus Salatası</h3>
+  </div>
+
+  <div class="card" data-category="salata" onclick="openRecipe('Çoban Salatası')">
+    <img src="images/çoban salatası.jpg" alt="Çoban Salatası">
+    <h3>Çoban Salatası</h3>
+  </div>
+
+  <div class="card" data-category="salata" onclick="openRecipe('Semizotu Salatası')">
+    <img src="images/semizotu salatası.jpg" alt="Semizotu Salatası">
+    <h3>Semizotu Salatası</h3>
+  </div>
+
+  <div class="card" data-category="salata" onclick="openRecipe('Zeytin Salatası')">
+    <img src="images/zeytin salatası.jpg" alt="Zeytin Salatası">
+    <h3>Zeytin Salatası</h3>
+  </div>
+  <!-- BARTIN YÖRESEL LEZZETLERİ -->
+  <div class="card" data-category="bartin" onclick="openRecipe('Amasra Salatası')">
+    <img src="images/amasra salatası.jpg" alt="Geleneksel Amasra Salatası">
+    <h3>Amasra Salatası</h3>
+  </div>
+
+  <div class="card" data-category="bartin" onclick="openRecipe('Pumpum Çorbası')">
+    <img src="images/pumpum çorbası.jpg" alt="Bartın Usulü Pumpum Çorbası">
+    <h3>Pumpum Çorbası</h3>
+  </div>
+
+  <div class="card" data-category="bartin" onclick="openRecipe('Tavuklu Köy Böreği')">
+    <img src="images/tavuklu köy böreği.jpg" alt="Bartın Tavuklu Köy Böreği">
+    <h3>Tavuklu Köy Böreği</h3>
+  </div>
+
+  <div class="card" data-category="bartin" onclick="openRecipe('Kabak Burması')">
+    <img src="images/kabak burması.jpg" alt="Meşhur Bartın Kabak Burması">
+    <h3>Kabak Burması</h3>
+  </div>
+
+  <div class="card" data-category="bartin" onclick="openRecipe('Bartın Beyaz Baklavası')">
+    <img src="images/bartın beyaz baklavası.jpg" alt="Tescilli Bartın Beyaz Baklavası">
+    <h3>Bartın Beyaz Baklavası</h3>
+  </div>
+
+  <div class="card" data-category="bartin" onclick="openRecipe('Döşemeli Mancar')">
+    <img src="images/döşemeli mancar.jpg" alt="Yöresel Döşemeli Mancar">
+    <h3>Döşemeli Mancar</h3>
+  </div>
+
+  <!-- DÜNYA MUTFAKLARI ÜLKE SEÇİM KARTLARI -->
+  <div class="card country-card" data-category="dunya" onclick="filterCountryFoods('tr', 'Türkiye Mutfağı')">
+    <div class="flag-badge">🇹🇷</div>
+    <img src="images/türkiye mutfağı.jpg" alt="Türkiye Mutfağı">
+    <h3>Türkiye</h3>
+  </div>
+
+  <div class="card country-card" data-category="dunya" onclick="filterCountryFoods('it', 'İtalya Mutfağı')">
+    <div class="flag-badge">🇮🇹</div>
+    <img src="images/italya mutfağı.jpg" alt="İtalya Mutfağı">
+    <h3>İtalya</h3>
+  </div>
+
+  <div class="card country-card" data-category="dunya" onclick="filterCountryFoods('fr', 'Fransa Mutfağı')">
+    <div class="flag-badge">🇫🇷</div>
+    <img src="images/fransa mutfağı.jpg" alt="Fransa Mutfağı">
+    <h3>Fransa</h3>
+  </div>
+
+  <div class="card country-card" data-category="dunya" onclick="filterCountryFoods('jp', 'Japonya Mutfağı')">
+    <div class="flag-badge">🇯🇵</div>
+    <img src="images/japonya mutfağı.jpg" alt="Japonya Mutfağı">
+    <h3>Japonya</h3>
+  </div>
+
+  <div class="card country-card" data-category="dunya" onclick="filterCountryFoods('mx', 'Meksika Mutfağı')">
+    <div class="flag-badge">🇲🇽</div>
+    <img src="images/meksika mutfağı.jpg" alt="Meksika Mutfağı">
+    <h3>Meksika</h3>
+  </div>
+
+  <div class="card country-card" data-category="dunya" onclick="filterCountryFoods('es', 'İspanya Mutfağı')">
+    <div class="flag-badge">🇪🇸</div>
+    <img src="images/ispanya mutfağı.jpg" alt="İspanya Mutfağı">
+    <h3>İspanya</h3>
+  </div>
+
+  <!-- DÜNYA MUTFAKLARI ANA YEMEK KARTLARI (Başlangıçta Tamamen Gizli) -->
+  <!-- Türkiye Yemekleri -->
+  <div class="card food-card tr-food" data-category="dunya" onclick="openRecipe('İskender Kebap')" style="display: none;">
+    <img src="images/iskender kebap.jpg" alt="İskender Kebap">
+    <h3>İskender Kebap</h3>
+  </div>
+  <div class="card food-card tr-food" data-category="dunya" onclick="openRecipe('Hünkar Beğendi')" style="display: none;">
+    <img src="images/hünkar beğendi.jpg" alt="Hünkar Beğendi">
+    <h3>Hünkar Beğendi</h3>
+  </div>
+  <div class="card food-card tr-food" data-category="dunya" onclick="openRecipe('Mantı')" style="display: none;">
+    <img src="images/mantı.jpg" alt="Kayseri Mantısı">
+    <h3>Mantı</h3>
+  </div>
+  <div class="card food-card tr-food" data-category="dunya" onclick="openRecipe('Karnıyarık')" style="display: none;">
+    <img src="images/karnıyarık.jpg" alt="Geleneksel Karnıyarık">
+    <h3>Karnıyarık</h3>
+  </div>
+  <div class="card food-card tr-food" data-category="dunya" onclick="openRecipe('Çökertme Kebabı')" style="display: none;">
+    <img src="images/çökertme kebabı.jpg" alt="Bodrum Çökertme Kebabı">
+    <h3>Çökertme Kebabı</h3>
+  </div>
+  <div class="card food-card tr-food" data-category="dunya" onclick="openRecipe('Perde Pilavı')" style="display: none;">
+    <img src="images/perde pilavı.jpg" alt="Siirt Perde Pilavı">
+    <h3>Perde Pilavı</h3>
+  </div>
+
+  <!-- İtalya Yemekleri -->
+  <div class="card food-card it-food" data-category="dunya" onclick="openRecipe('Lasagna Alla Bolognese')" style="display: none;">
+    <img src="images/lasagna alla bolognese.jpg" alt="Lasagna Alla Bolognese">
+    <h3>Lasagna Alla Bolognese</h3>
+  </div>
+  <div class="card food-card it-food" data-category="dunya" onclick="openRecipe('Risotto Ai Funghi')" style="display: none;">
+    <img src="images/risotto.jpg" alt="Risotto Ai Funghi">
+    <h3>Risotto Ai Funghi</h3>
+  </div>
+  <div class="card food-card it-food" data-category="dunya" onclick="openRecipe('Carbonara')" style="display: none;">
+    <img src="images/carbonara.jpg" alt="Carbonara">
+    <h3>Carbonara</h3>
+  </div>
+  <div class="card food-card it-food" data-category="dunya" onclick="openRecipe('Gnocchi')" style="display: none;">
+    <img src="images/gnocchi.jpg" alt="Gnocchi">
+    <h3>Gnocchi</h3>
+  </div>
+  <div class="card food-card it-food" data-category="dunya" onclick="openRecipe('Osso Buco')" style="display: none;">
+    <img src="images/osso buco.jpg" alt="Osso Buco">
+    <h3>Osso Buco</h3>
+  </div>
+  <div class="card food-card it-food" data-category="dunya" onclick="openRecipe('Neapolitan Pizza')" style="display: none;">
+    <img src="images/neapolitan pizza.jpg" alt="Neapolitan Pizza">
+    <h3>Neapolitan Pizza</h3>
+  </div>
+
+  <!-- Fransa Yemekleri -->
+  <div class="card food-card fr-food" data-category="dunya" onclick="openRecipe('Beef Bourguignon')" style="display: none;">
+    <img src="images/beef bourguignon.jpg" alt="Beef Bourguignon">
+    <h3>Beef Bourguignon</h3>
+  </div>
+  <div class="card food-card fr-food" data-category="dunya" onclick="openRecipe('Ratatouille')" style="display: none;">
+    <img src="images/ratatouille.jpg" alt="Ratatouille">
+    <h3>Ratatouille</h3>
+  </div>
+  <div class="card food-card fr-food" data-category="dunya" onclick="openRecipe('Coq au Vin')" style="display: none;">
+    <img src="images/coq au vin.jpg" alt="Coq au Vin">
+    <h3>Coq au Vin</h3>
+  </div>
+  <div class="card food-card fr-food" data-category="dunya" onclick="openRecipe('Fransız Soğan Çorbası')" style="display: none;">
+    <img src="images/fransız soğan çorbası.jpg" alt="Fransız Soğan Çorbası">
+    <h3>Fransız Soğan Çorbası</h3>
+  </div>
+  <div class="card food-card fr-food" data-category="dunya" onclick="openRecipe('Confit de Canard')" style="display: none;">
+    <img src="images/confit de canard.jpg" alt="Confit de Canard">
+    <h3>Confit de Canard</h3>
+  </div>
+  <div class="card food-card fr-food" data-category="dunya" onclick="openRecipe('Quiche Lorraine')" style="display: none;">
+    <img src="images/quiche lorraine.jpg" alt="Quiche Lorraine">
+    <h3>Quiche Lorraine</h3>
+  </div>
+
+  <!-- Japonya Yemekleri -->
+  <div class="card food-card jp-food" data-category="dunya" onclick="openRecipe('Geleneksel Ramen')" style="display: none;">
+    <img src="images/geleneksel ramen.jpg" alt="Geleneksel Ramen">
+    <h3>Geleneksel Ramen</h3>
+  </div>
+  <div class="card food-card jp-food" data-category="dunya" onclick="openRecipe('Sushi')" style="display: none;">
+    <img src="images/sushi.jpg" alt="Sushi">
+    <h3>Sushi</h3>
+  </div>
+  <div class="card food-card jp-food" data-category="dunya" onclick="openRecipe('Chicken Katsu Curry')" style="display: none;">
+    <img src="images/chicken katsu curry.jpg" alt="Chicken Katsu Curry">
+    <h3>Chicken Katsu Curry</h3>
+  </div>
+  <div class="card food-card jp-food" data-category="dunya" onclick="openRecipe('Takoyaki')" style="display: none;">
+    <img src="images/takoyaki.jpg" alt="Takoyaki">
+    <h3>Takoyaki</h3>
+  </div>
+  <div class="card food-card jp-food" data-category="dunya" onclick="openRecipe('Okonomiyaki')" style="display: none;">
+    <img src="images/okonomiyaki.jpg" alt="Okonomiyaki">
+    <h3>Okonomiyaki</h3>
+  </div>
+  <div class="card food-card jp-food" data-category="dunya" onclick="openRecipe('Gyudon')" style="display: none;">
+    <img src="images/gyudon.jpg" alt="Gyudon">
+    <h3>Gyudon</h3>
+  </div>
+
+  <!-- Meksika Yemekleri -->
+  <div class="card food-card mx-food" data-category="dunya" onclick="openRecipe('Birria Tacos')" style="display: none;">
+    <img src="images/birria tacos.jpg" alt="Birria Tacos">
+    <h3>Birria Tacos</h3>
+  </div>
+  <div class="card food-card mx-food" data-category="dunya" onclick="openRecipe('Enchiladas')" style="display: none;">
+    <img src="images/enchiladas.jpg" alt="Enchiladas">
+    <h3>Enchiladas</h3>
+  </div>
+  <div class="card food-card mx-food" data-category="dunya" onclick="openRecipe('Quesadilla')" style="display: none;">
+    <img src="images/quesadilla.jpg" alt="Quesadilla">
+    <h3>Quesadilla</h3>
+  </div>
+  <div class="card food-card mx-food" data-category="dunya" onclick="openRecipe('Chilli Con Carne')" style="display: none;">
+    <img src="images/chilli con carne.jpg" alt="Chilli Con Carne">
+    <h3>Chilli Con Carne</h3>
+  </div>
+  <div class="card food-card mx-food" data-category="dunya" onclick="openRecipe('Fajita')" style="display: none;">
+    <img src="images/fajita.jpg" alt="Fajita">
+    <h3>Fajita</h3>
+  </div>
+  <div class="card food-card mx-food" data-category="dunya" onclick="openRecipe('Mole Poblano')" style="display: none;">
+    <img src="images/mole poblano.jpg" alt="Mole Poblano">
+    <h3>Mole Poblano</h3>
+  </div>
+
+  <!-- İspanya Yemekleri -->
+  <div class="card food-card es-food" data-category="dunya" onclick="openRecipe('Seafood Paella')" style="display: none;">
+    <img src="images/seafood paella.jpg" alt="Seafood Paella">
+    <h3>Seafood Paella</h3>
+  </div>
+  <div class="card food-card es-food" data-category="dunya" onclick="openRecipe('Gazpacho')" style="display: none;">
+    <img src="images/gazpacho.jpg" alt="Gazpacho">
+    <h3>Gazpacho</h3>
+  </div>
+  <div class="card food-card es-food" data-category="dunya" onclick="openRecipe('Tortilla de Patatas')" style="display: none;">
+    <img src="images/tortilla de patatas.jpg" alt="Tortilla de Patatas">
+    <h3>Tortilla de Patatas</h3>
+  </div>
+  <div class="card food-card es-food" data-category="dunya" onclick="openRecipe('Patatas Bravas')" style="display: none;">
+    <img src="images/patatas bravas.jpg" alt="Patatas Bravas">
+    <h3>Patatas Bravas</h3>
+  </div>
+  <div class="card food-card es-food" data-category="dunya" onclick="openRecipe('Gambas al Ajillo')" style="display: none;">
+    <img src="images/gambas al ajillo.jpg" alt="Gambas al Ajillo">
+    <h3>Gambas al Ajillo</h3>
+  </div>
+  <div class="card food-card es-food" data-category="dunya" onclick="openRecipe('Pollo al Ajillo')" style="display: none;">
+    <img src="images/pollo al ajillo.jpg" alt="Pollo al Ajillo">
+    <h3>Pollo al Ajillo</h3>
+  </div>
+
+</section>
+
+<!-- GÜNLÜK MENÜ ALANI — Footer öncesi -->
+<div class="daily-menu-wrapper">
+  <div class="daily-menu-inner-title">
+    <span>━━━</span>
+    <h2>📅 Günün Yemeği</h2>
+    <span>━━━</span>
+  </div>
+  <section class="daily-menu-section">
+    <div class="daily-menu-header">
+      <div class="daily-menu-title">
+        <span class="daily-badge">📅 GÜNÜN YEMEĞİ</span>
+        <span id="daily-date" class="daily-date"></span>
+      </div>
+      <button class="refresh-btn" onclick="fetchDailyMeal()" title="Yeni tarif getir">🔄 Yenile</button>
+    </div>
+
+    <div id="daily-loading" class="daily-loading">
+      <div class="loading-spinner"></div>
+      <p>Bugünün yemeği hazırlanıyor...</p>
+    </div>
+
+    <div id="daily-content" class="daily-content hidden">
+      <img id="daily-img" src="" alt="Günün Yemeği" class="daily-img" />
+      <div class="daily-info">
+        <h2 id="daily-name" class="daily-name"></h2>
+        <div class="daily-tags">
+          <span id="daily-country" class="daily-tag">🌍</span>
+          <span id="daily-category" class="daily-tag">🍽</span>
+        </div>
+        <div class="daily-ingredients-box">
+          <h4>Malzemeler</h4>
+          <ul id="daily-ingredients" class="daily-ingredients"></ul>
+        </div>
+        <a id="daily-youtube" href="#" target="_blank" class="daily-yt-btn hidden">▶ YouTube'da İzle</a>
+      </div>
+    </div>
+
+    <div id="daily-error" class="daily-error hidden">
+      <p>😕 Tarif yüklenemedi. İnternet bağlantını kontrol et ve yenile.</p>
+    </div>
+  </section>
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <p>&copy; 2026 LokmaDefteri. Tüm Hakları Saklıdır.</p>
+    <div class="footer-links">
+      <a href="#recipes">Tarifler</a>
+      <a href="#">Hakkımızda</a>
+      <a href="#">İletişim</a>
+    </div>
+  </div>
+</footer>
+
+<div id="modal" class="modal hidden">
+  <div class="modal-box">
+    <button onclick="closeModal()" class="close-btn">✕</button>
+    <div class="modal-title-row">
+      <h2 id="title"></h2>
+      <button id="fav-btn" class="fav-btn" onclick="toggleFavorite()">🤍 Favorilere Ekle</button>
+    </div>
+    
+    <div class="modal-content">
+        <h3>Malzemeler</h3>
+        <ul id="ingredients"></ul>
+        
+        <h3>Hazırlanışı</h3>
+        <p id="steps" style="white-space: pre-line; line-height: 1.6;"></p>
+        
+        <div class="tips-box">
+            <strong>💡 Şefin İpucu:</strong>
+            <p id="tips"></p>
+        </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
